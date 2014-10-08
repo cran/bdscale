@@ -1,0 +1,10 @@
+a84cdc336e2b7e4e81eb04522c240a25 *DESCRIPTION
+d99706e01207e3d6329e615b953d5d93 *NAMESPACE
+68504de0e429e6a720a88f619751daba *R/scale_bd.R
+44632cf9e675edf6d7f60c80548a1d80 *R/yahoo_dates.R
+b087aa877119d6947bde70aa8fa7bb55 *README.md
+7420b741e24935fc2ad593452a501e8b *exec/example.R
+adedc6a4f5588e64a52207a74783acec *man/figures/business.PNG
+9a86d12c473c7913e75c176e9651c2ab *man/figures/calendar.PNG
+c4e344dc2838837c6330f06b14190362 *man/get_nyse.Rd
+bbbd87126cc71ee2a93134e81db70db3 *man/scale_x_bd.Rd
