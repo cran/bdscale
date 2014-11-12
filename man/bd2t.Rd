@@ -13,10 +13,15 @@ your \code{business.dates} vector}
 \item{business.dates}{a vector of \code{Date} objects, sorted ascending}
 }
 \value{
-An integer vector where each element is the number of business days \code{t}
+returns an integer vector where each element is the number of business days \code{t}
  after the first date in your \code{business.dates} vector
 }
 \description{
 Transform \code{Date}s into your business-date scale.
+}
+\examples{
+monday <- as.Date('2014-10-13')
+weekdays <- monday + 0:4
+bd2t(monday + c(1, 3), weekdays)
 }
 

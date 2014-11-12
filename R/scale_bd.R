@@ -4,10 +4,15 @@
 #'  integer \code{t} which is the number of business days after the first date in
 #'  your \code{business.dates} vector
 #' @param business.dates a vector of \code{Date} objects, sorted ascending
-#' @return An integer vector where each element is the number of business days \code{t} 
+#' @return returns an integer vector where each element is the number of business days \code{t} 
 #'  after the first date in your \code{business.dates} vector
 #'  
 #' @export
+#' 
+#' @examples
+#' monday <- as.Date('2014-10-13')
+#' weekdays <- monday + 0:4
+#' bd2t(monday + c(1, 3), weekdays)
 #' 
 bd2t <- function(dates, business.dates) {
   result=match(dates, business.dates) - 1
@@ -41,7 +46,12 @@ scale_bd <- function(aesthetics, expand=waiver(), breaks, minor_breaks=waiver(),
 #' 
 #' @export
 #' @import ggplot2 scales
-#' @example exec/example_scale_bd.R
+#' @examples
+#' 
+#' \dontrun{
+#'  ggplot(ts, aes(x=date, y=price)) + 
+#'    scale_x_bd(business.dates=yahoo('SPY'), max.major.breaks=10, labels=date_format("%b '%y"))
+#' }
 #' 
 scale_x_bd <- function(..., business.dates, max.major.breaks=5, max.minor.breaks=max.major.breaks*5, breaks=bd_breaks(business.dates)) {
   
@@ -56,10 +66,9 @@ quarter_format <- function(date) sprintf("Q%s '%s", quarter(date), format(date, 
 last_monday <- function(date) as.Date(as.integer(date) - as.integer(format(date, '%u')) + 1, origin=epoch)
 
 firstInGroup <- function(dates, f.group) {
-  group <- f.group(dates)
-  grouped <- split(dates, factor(group))
-  result <- sapply(grouped, function(l) l[[1]])
-  as.Date(result, origin=epoch)
+  groups <- f.group(dates)
+  grouped <- split(dates, factor(groups))
+  sapply(grouped, function(l) l[[1]])
 }
 
 #' Date breaks corresponding to the first trading day of standard periods
@@ -82,7 +91,7 @@ firstInGroup <- function(dates, f.group) {
 #' 
 bd_breaks <- function(business.dates, n.max=5) {
   
-  breaks.weeks <-firstInGroup(business.dates, last_monday)
+  breaks.weeks <- firstInGroup(business.dates, last_monday)
   breaks.months <- firstInGroup(business.dates, function(ds) format(ds, "%b '%y"))
   breaks.quarters <- firstInGroup(business.dates, quarter_format)
   breaks.years <- firstInGroup(business.dates, function(ds) format(ds, '%Y'))
